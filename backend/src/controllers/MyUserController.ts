@@ -11,10 +11,10 @@ const createCurrentUser = async (req: Request, res: Response) => {
     const newUser = new User(req.body);
     await newUser.save();
 
-    res.status(201).json(newUser.toObject());
+    return res.status(201).json(newUser.toObject());
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Error creating user" });
+    return res.status(500).json({ message: "Error creating user" });
   }
 };
 
