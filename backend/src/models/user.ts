@@ -1,9 +1,12 @@
-import mongoose from "mongoose";
+import mongoose, { STATES } from "mongoose";
 
 const userSchema = new mongoose.Schema({
   auth0Id: {
     type: String,
     required: true,
+  },
+  name: {
+    type: String,
   },
   email: {
     type: String,

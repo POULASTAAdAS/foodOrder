@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import mongoose from "mongoose";
-import myUserRoute from "./routes/MyuserRoute";
+import myUserRoute from "./routes/MyUserRoute";
 
 mongoose
   .connect(process.env.MONGO_URI as string)
