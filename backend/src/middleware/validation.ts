@@ -1,4 +1,3 @@
-import { error } from "console";
 import { NextFunction, Request, Response } from "express";
 import { body, validationResult } from "express-validator";
 
@@ -23,6 +22,6 @@ export const validateMyUserRequest = [
     .notEmpty()
     .withMessage("addressLine1 must be a string"),
   body("city").isString().notEmpty().withMessage("city must be a string"),
-  body("coutnry").isString().notEmpty().withMessage("coutnry must be a string"),
+  body("country").isString().notEmpty().withMessage("country must be a string"),
   handleValidationErrors,
 ];

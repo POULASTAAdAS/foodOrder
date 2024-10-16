@@ -1,3 +1,4 @@
+import { error } from "console";
 import { Request, Response } from "express";
 import User from "../models/user";
 
@@ -12,12 +13,13 @@ const updateCurrentUser = async (req: Request, res: Response) => {
       return;
     }
 
-    if (name) user.name = name;
-    if (addressLine1) user.addressLine1 = addressLine1;
-    if (country) user.country = country;
-    if (city) user.city = city;
- 
+    user.name = name;
+    user.addressLine1 = addressLine1;
+    user.country = country;
+    user.city = city;
+
     await user.save();
+    res.status(200).json({ message: "User Updated" });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Error updating user" });
@@ -44,7 +46,23 @@ const createCurrentUser = async (req: Request, res: Response) => {
   }
 };
 
+const getCurrentUser = async (req: Request, res: Response) => {
+  try {
+    const curretUser = await User.findOne({ _id: req.userId });
+    if (!curretUser) {
+      res.status(404).json({ message: "User not found" });
+      return;
+    }
+
+    res.json(curretUser);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "error geting user data" });
+  }
+};
+
 export default {
   createCurrentUser,
   updateCurrentUser,
+  getCurrentUser,
 };
